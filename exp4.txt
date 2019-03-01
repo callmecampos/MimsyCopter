@@ -1,0 +1,15 @@
+Orientation: 531959584, 1375 
+Orientation: 532085442, 2739 
+Orientation: 532203337, 1354 
+Orientation: 532318334, 1361 
+Orientation: 532544307, 1363 
+Orientation: 532656708, 1360 
+Orientation: 532767553, 1372 
+Orientation: 532775718, 1419 
+Orientation: 532877083, 1355 
+Orientation: 532985965, 1335 
+Orientation: 533095134, 2701 
+Orientation: 533212057, 1393 
+Orientation: 533574698, 1337 
+Orientation: 534044147, 1342 
+Orientation: 534189251, 1400 

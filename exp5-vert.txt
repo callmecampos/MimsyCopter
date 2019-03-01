@@ -1,0 +1,12 @@
+Orientation: 401065059, 90
+Orientation: 401291634, 88 
+Orientation: 401331504, -87 
+Orientation: 401358210, 99 
+Orientation: 401393701, 52 
+Orientation: 401492513, 95 
+Orientation: 401433238, 85 
+Orientation: 401460512, 82 
+Orientation: 401401499, 85 
+Orientation: 401629010, 100 
+Orientation: 401725240, -290 
+Orientation: 401766677, -244 
