@@ -24,14 +24,18 @@ def click_and_crop(event, x, y, flags, param):
     # check to see if the left mouse button was released
     if event == cv2.EVENT_LBUTTONUP:
     	# record the ending (x, y) coordinates
+        print(x, y)
         refPt = (x, y)
         count += 1
 
 vs = cv2.VideoCapture(args["video"])
 fps = vs.get(cv2.CAP_PROP_FPS)
 
-j = 0
-frames = []
+locations, i, new, last_id = [], -1, True, count
+frame_count = 0
+
+times = [96, 111, 113]
+
 while True:
     # grab the current frame
     frame = vs.read()
@@ -44,17 +48,6 @@ while True:
     if frame is None:
         break
 
-    frames.append(frame)
-
-    j+=1
-    print(j, end='\r')
-
-locations, i, new, last_id = [], -1, True, count
-frame_count = 0
-id = 0
-while id < len(frames):
-    frame = frames[id]
-
     frame_count += 1
     cv2.putText(frame, "Time: {}".format(frame_count / fps),
 		(10, 30), cv2.FONT_HERSHEY_SIMPLEX,
@@ -63,17 +56,22 @@ while id < len(frames):
     cv2.imshow("Frame", frame)
     cv2.setMouseCallback("Frame", click_and_crop)
 
-    key = cv2.waitKey(20*1000) & 0xFF
-
     if new:
         new = False
         locations.append([])
         i += 1
+        if i == len(times):
+            print("DIMENSIONS: {}".format(frame.shape[:2]))
+            break
+
+    if frame_count / fps < times[i]:
+        key = cv2.waitKey(1) & 0xFF
+        continue
+
+    key = cv2.waitKey(20*1000) & 0xFF
 
     if key == ord("c"): # continue
         continue
-    elif key == ord("b"): # back
-        id -= 1
     elif key == ord("n"): # new pose
         new = True
         print("New pose.")
@@ -81,6 +79,7 @@ while id < len(frames):
         if count > last_id:
             last_id = count
             locations[i].append(refPt)
+            print("Saved.")
         else:
             print("You did not annotate a point.")
     elif key == ord("p"):
@@ -88,8 +87,6 @@ while id < len(frames):
     elif key == ord("q"): # quit
         print("DIMENSIONS: {}".format(frame.shape[:2]))
         break
-
-    id += 1
 
 print("\n\nDUMP:\n")
 print(locations)
