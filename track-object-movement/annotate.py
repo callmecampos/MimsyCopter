@@ -34,7 +34,7 @@ fps = vs.get(cv2.CAP_PROP_FPS)
 locations, i, new, last_id = [], -1, True, count
 frame_count = 0
 
-times = [96, 111, 113]
+times = [9.5, 23.5, 25.5, 32.5, 60.5, 86.5, 88.5, 97.5]
 
 while True:
     # grab the current frame

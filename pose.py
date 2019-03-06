@@ -77,14 +77,16 @@ def plot_files(d=1.3843, brian = "drone_spin_b.txt", felipe = "drone_spin_f.txt"
 
         heading /= float(count)
 
-    poses, valid_pulses = [], []
+    poses, error_low, error_high, valid_pulses = [], [], [], []
     for i, b in enumerate(pulse_b):
         for j, f in enumerate(pulse_f):
             # match pulses
             if abs(b.time - f.time) < 1:
                 pulse_b[i].begin = pulse_f[j].begin
+                error_low.append(compute_distance(b.angle - 0.05, f.angle - 0.05, phi=heading, d=d))
                 poses.append(compute_distance(b.angle, f.angle, phi=heading, d=d))
+                error_high.append(compute_distance(b.angle + 0.05, f.angle + 0.05, phi=heading, d=d))
                 valid_pulses.append((b, f))
                 break
 
-    return poses, heading, pulse_b, pulse_f, valid_pulses
+    return poses, heading, pulse_b, pulse_f, valid_pulses, error_high, error_low
